@@ -3,44 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodyEats 🌸</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>MoodyEats – Mood Based Food Recommender</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
-        <header>
-            <h1 class="logo">MoodyEats 🌸</h1>
-            <p class="tagline">Tell us your mood, we'll suggest the food!</p>
-        </header>
+        <h1 class="title">MoodyEats 🌸</h1>
+        <p class="subtitle">Select your mood and get a food suggestion!</p>
 
-        <main>
-            <div class="mood-selector">
-                <label for="mood">What's your vibe today? 💭</label>
-                <select id="mood">
-                    <option value="">Pick a mood...</option>
-                    <option value="hungry">Hungry 🥺</option>
-                    <option value="sad">Sad 😢</option>
-                    <option value="stressed">Stressed 😩</option>
-                    <option value="craving">Craving something yummy 🤤</option>
-                    <option value="angry">Angry 🔥</option>
-                    <option value="confused">Confused 🤔</option>
-                    <option value="bored">Bored 😴</option>
-                </select>
-                <button onclick="getSuggestion()">Get Food Vibe! ✨</button>
-            </div>
+        <select id="mood" class="dropdown">
+            <option value="">-- Select Your Mood --</option>
+            <option value="happy">Happy 😊</option>
+            <option value="sad">Sad 😢</option>
+            <option value="stressed">Stressed 😖</option>
+            <option value="angry">Angry 😡</option>
+            <option value="romantic">Romantic 💕</option>
+            <option value="lazy">Lazy 😴</option>
+        </select>
 
-            <div id="suggestion" class="suggestion hidden">
-                <h2 id="vibe">Your Vibe: </h2>
-                <div id="food-suggestions" class="foods"></div>
-            </div>
-        </main>
+        <button onclick="getSuggestion()" class="btn">Get Suggestion</button>
 
-        <footer>
-            <p>Made with love in pastel pink. 🍲💕</p>
-        </footer>
+        <div id="suggestion" class="suggestion hidden">
+            <h2 id="vibe"></h2>
+            <div id="food-suggestions" class="food-grid"></div>
+        </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
+
