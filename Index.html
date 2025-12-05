@@ -3,44 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoodyEats 🌸</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>MoodyEats</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #ffeef7; /* pastel pink */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #ff1e8a; /* hot pink */
+        }
+
+        header {
+            padding: 30px 20px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.1);
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            border: 2px solid #ff66b3;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            background: #ff1e8a; /* Hot Pink */
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        #suggestion {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 18px;
+            background: #ffebf4;
+            border: 2px solid #ff66b3;
+            display: none;
+        }
+
+        #food-suggestions {
+            margin-top: 15px;
+        }
+
+        .food {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 8px 0;
+            font-size: 1.3rem;
+            border: 1.5px solid #ff99cc;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1 class="logo">MoodyEats 🌸</h1>
-            <p class="tagline">Tell us your mood, we'll suggest the food!</p>
-        </header>
 
-        <main>
-            <div class="mood-selector">
-                <label for="mood">What's your vibe today? 💭</label>
-                <select id="mood">
-                    <option value="">Pick a mood...</option>
-                    <option value="hungry">Hungry 🥺</option>
-                    <option value="sad">Sad 😢</option>
-                    <option value="stressed">Stressed 😩</option>
-                    <option value="craving">Craving something yummy 🤤</option>
-                    <option value="angry">Angry 🔥</option>
-                    <option value="confused">Confused 🤔</option>
-                    <option value="bored">Bored 😴</option>
-                </select>
-                <button onclick="getSuggestion()">Get Food Vibe! ✨</button>
-            </div>
+<header>
+    <h1>MoodyEats 💗</h1>
+    <p>Pick your mood → Get your food!</p>
+</header>
 
-            <div id="suggestion" class="suggestion hidden">
-                <h2 id="vibe">Your Vibe: </h2>
-                <div id="food-suggestions" class="foods"></div>
-            </div>
-        </main>
+<div class="container">
+    <select id="mood">
+        <option value="">How are you feeling?</option>
+        <option value="hungry">Hungry 😋</option>
+        <option value="sad">Sad 😢</option>
+        <option value="stressed">Stressed 😫</option>
+        <option value="craving">Craving 🤤</option>
+        <option value="angry">Angry 😡</option>
+        <option value="confused">Confused 😕</option>
+        <option value="bored">Bored 😐</option>
+    </select>
 
-        <footer>
-            <p>Made with love in pastel pink. 🍲💕</p>
-        </footer>
+    <button onclick="getSuggestion()">Get Suggestions 🍽️</button>
+
+    <div id="suggestion">
+        <h2 id="vibe"></h2>
+        <div id="food-suggestions"></div>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<script>
+function getSuggestion() {
+    const moodSelect = document.getElementById('mood');
+    const mood = moodSelect.value;
+    const suggestionDiv = document.getElementById('suggestion');
+    const vibeH2 = document.getElementById('vibe');
+    const foodsDiv = document.getElementById('food-suggestions');
+
+    if (!mood) {
+        alert('Pick a mood first! 🌸');
+        return;
+    }
+
+    const moods = {
+        hungry: { vibe: 'Time to feast! 🍲', foods: ['🍛 Biryani', '🥟 Momos', '🍜 Noodles'] },
+        sad: { vibe: 'Comfort hugs incoming... 🤗', foods: ['🍦 Ice Cream', '🍰 Cheesecake', '🍫 Brownie'] },
+        stressed: { vibe: 'Chill pill in food form! 😌', foods: ['🌮 Vada Pav', '🍜 Ramen', '🍦 Ice Cream'] },
+        craving: { vibe: 'Indulge away! 🤩', foods: ['🍛 Biryani', '🍰 Cheesecake', '🍫 Brownie'] },
+        angry: { vibe: 'Spice it out! 🔥', foods: ['🌶️ Vada Pav', '🍛 Biryani', '🥟 Momos'] },
+        confused: { vibe: 'Mix it up! ❓', foods: ['🍜 Noodles', '🥟 Momos', '🍜 Ramen'] },
+        bored: { vibe: 'Adventure on a plate! 🎉', foods: ['🍛 Biryani', '🌮 Vada Pav', '🍦 Ice Cream'] }
+    };
+
+    const data = moods[mood];
+    vibeH2.textContent = data.vibe;
+    foodsDiv.innerHTML = data.foods.map(food => `<div class="food">${food}</div>`).join('');
+
+    suggestionDiv.style.display = "block";
+    suggestionDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('mood').focus();
+});
+</script>
+
 </body>
 </html>
