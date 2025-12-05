@@ -1,4 +1,4 @@
-const foodOptions = {
+const moods = {
     happy: {
         vibe: "Yay! You're glowing! ✨ Try these:",
         foods: ["Ice Cream", "Nachos", "Fried Rice", "Boba Tea", "Chocolate Cake"]
@@ -21,33 +21,35 @@ const foodOptions = {
     }
 };
 
+
 function getSuggestion() {
-    const mood = document.getElementById('mood').value;
-    const suggestionDiv = document.getElementById('suggestion');
-    const vibeText = document.getElementById('vibe');
-    const foodsDiv = document.getElementById('food-suggestions');
+    const mood = document.getElementById("mood").value;
+    const suggestionDiv = document.getElementById("suggestion");
+    const vibeText = document.getElementById("vibe");
+    const foodsDiv = document.getElementById("food-suggestions");
 
     if (!mood) {
         alert("Pick a mood first! 🌸");
         return;
     }
 
-    const selectedMood = foodOptions[mood];
+    const selectedMood = moods[mood];
 
     // Show vibe
-    vibeText.innerText = selectedMood.vibe;
+    vibeText.textContent = selectedMood.vibe;
 
-    // Clear previous food list
+    // Clear previous food items
     foodsDiv.innerHTML = "";
 
-    // Insert food items
+    // Add food items
     selectedMood.foods.forEach(food => {
-        const item = document.createElement('div');
+        const item = document.createElement("div");
         item.className = "food-item";
-        item.innerText = food;
+        item.textContent = food;
         foodsDiv.appendChild(item);
     });
 
+    // Show box
     suggestionDiv.style.display = "block";
 }
 
